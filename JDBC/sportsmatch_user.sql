@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: new_schema
+-- Host: localhost    Database: sportsmatch
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -16,38 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `comment`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `comment`;
+DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comment` (
-  `comment_id` int NOT NULL AUTO_INCREMENT,
-  `post_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `comment_content` text NOT NULL,
-  `comment_delete_yn` tinyint(1) DEFAULT '0',
-  `comment_insert_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  `comment_updated_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `comment_deleted_time` datetime DEFAULT NULL,
-  `comment_secret_yn` tinyint(1) DEFAULT '0',
-  `comment_hidden_yn` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`comment_id`),
-  KEY `post_id` (`post_id`),
-  KEY `user_id` (`user_id`),
-  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
-  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+CREATE TABLE `user` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `team_id` int DEFAULT NULL,
+  `passwd` varchar(255) NOT NULL,
+  `user_name` varchar(50) NOT NULL,
+  `phone_number` varchar(15) NOT NULL,
+  `nickname` varchar(50) NOT NULL,
+  `registDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `ban_yn` tinyint(1) DEFAULT '0',
+  `location` varchar(255) DEFAULT NULL,
+  `age` int DEFAULT NULL,
+  `sex` char(1) DEFAULT NULL,
+  `position` varchar(50) DEFAULT NULL,
+  `profile_image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `comment`
+-- Dumping data for table `user`
 --
 
-LOCK TABLES `comment` WRITE;
-/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -59,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-18  4:01:39
+-- Dump completed on 2024-11-18 20:00:00

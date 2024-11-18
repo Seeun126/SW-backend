@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: new_schema
+-- Host: localhost    Database: sportsmatch
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -16,37 +16,38 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `post`
+-- Table structure for table `comment`
 --
 
-DROP TABLE IF EXISTS `post`;
+DROP TABLE IF EXISTS `comment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `post` (
-  `post_id` int NOT NULL AUTO_INCREMENT,
-  `post_content` text NOT NULL,
-  `post_imagePath` varchar(255) DEFAULT NULL,
-  `post_created_time` datetime DEFAULT CURRENT_TIMESTAMP,
-  `post_updated_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `post_hits` int DEFAULT '0',
-  `post_like_count` int DEFAULT '0',
-  `post_dislike_count` int DEFAULT '0',
-  `post_report_count` int DEFAULT '0',
-  `post_comment_count` int DEFAULT '0',
+CREATE TABLE `comment` (
+  `comment_id` int NOT NULL AUTO_INCREMENT,
+  `post_id` int NOT NULL,
   `user_id` int NOT NULL,
-  PRIMARY KEY (`post_id`),
+  `comment_content` text NOT NULL,
+  `comment_delete_yn` tinyint(1) DEFAULT '0',
+  `comment_insert_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `comment_updated_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `comment_deleted_time` datetime DEFAULT NULL,
+  `comment_secret_yn` tinyint(1) DEFAULT '0',
+  `comment_hidden_yn` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`comment_id`),
+  KEY `post_id` (`post_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`post_id`),
+  CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `post`
+-- Dumping data for table `comment`
 --
 
-LOCK TABLES `post` WRITE;
-/*!40000 ALTER TABLE `post` DISABLE KEYS */;
-/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +59,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-18  4:01:39
+-- Dump completed on 2024-11-18 20:00:01

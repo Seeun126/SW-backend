@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: new_schema
+-- Host: localhost    Database: sportsmatch
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -16,35 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `notification`
+-- Table structure for table `post`
 --
 
-DROP TABLE IF EXISTS `notification`;
+DROP TABLE IF EXISTS `post`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `notification` (
-  `noti_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `post` (
+  `post_id` int NOT NULL AUTO_INCREMENT,
+  `post_content` text NOT NULL,
+  `post_imagePath` varchar(255) DEFAULT NULL,
+  `post_created_time` datetime DEFAULT CURRENT_TIMESTAMP,
+  `post_updated_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `post_hits` int DEFAULT '0',
+  `post_like_count` int DEFAULT '0',
+  `post_dislike_count` int DEFAULT '0',
+  `post_report_count` int DEFAULT '0',
+  `post_comment_count` int DEFAULT '0',
   `user_id` int NOT NULL,
-  `team_id` int DEFAULT NULL,
-  `type` enum('system','team','post','comment') NOT NULL,
-  `message` text NOT NULL,
-  `is_read` tinyint(1) DEFAULT '0',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`noti_id`),
+  PRIMARY KEY (`post_id`),
   KEY `user_id` (`user_id`),
-  KEY `team_id` (`team_id`),
-  CONSTRAINT `notification_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  CONSTRAINT `notification_ibfk_2` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`)
+  CONSTRAINT `post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `notification`
+-- Dumping data for table `post`
 --
 
-LOCK TABLES `notification` WRITE;
-/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
+LOCK TABLES `post` WRITE;
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-18  4:01:39
+-- Dump completed on 2024-11-18 20:00:00

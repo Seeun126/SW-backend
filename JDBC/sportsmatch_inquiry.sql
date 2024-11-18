@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.40, for Win64 (x86_64)
 --
--- Host: localhost    Database: new_schema
+-- Host: localhost    Database: sportsmatch
 -- ------------------------------------------------------
 -- Server version	8.0.40
 
@@ -16,31 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `teammember`
+-- Table structure for table `inquiry`
 --
 
-DROP TABLE IF EXISTS `teammember`;
+DROP TABLE IF EXISTS `inquiry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `teammember` (
-  `team_id` int NOT NULL,
+CREATE TABLE `inquiry` (
+  `inquiry_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `role` enum('leader','member') DEFAULT 'member',
-  `joined_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`team_id`,`user_id`),
+  PRIMARY KEY (`inquiry_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `teammember_ibfk_1` FOREIGN KEY (`team_id`) REFERENCES `team` (`team_id`),
-  CONSTRAINT `teammember_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `inquiry_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `teammember`
+-- Dumping data for table `inquiry`
 --
 
-LOCK TABLES `teammember` WRITE;
-/*!40000 ALTER TABLE `teammember` DISABLE KEYS */;
-/*!40000 ALTER TABLE `teammember` ENABLE KEYS */;
+LOCK TABLES `inquiry` WRITE;
+/*!40000 ALTER TABLE `inquiry` DISABLE KEYS */;
+/*!40000 ALTER TABLE `inquiry` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-11-18  4:01:38
+-- Dump completed on 2024-11-18 20:00:01

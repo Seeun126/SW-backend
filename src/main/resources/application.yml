@@ -1,16 +1,15 @@
 server:
-  port: 8080
-
-#데이터베이스 연동 설정
+  port: 8082
+  #address: 0.0.0.0
 spring:
+
   application:
-    name: SportsMatch
+    name: member
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_member?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-        #jdbc:mysql://데이터베이스 주소:3306/데이터베이스 이름?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
-    username: user_member #sql 아이디
-    password: 9512 #sql 비밀번호
+    url: jdbc:mysql://localhost:3306/sportsmatch?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: user_member
+    password: 9512
   thymeleaf:
     cache: false
 
