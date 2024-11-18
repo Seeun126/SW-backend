@@ -4,7 +4,10 @@ import com.swengineer.sportsmatch.dto.BoardDTO;
 import com.swengineer.sportsmatch.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -12,7 +15,9 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/member")
-    public String member_findAll(){
+    public String member_findAll(Model model){
+        List<BoardDTO> boardDTOList = boardService.member_findAll();
+        model.addAttribute("member_post_List",boardDTOList);
         return "member";
     }
 
@@ -29,7 +34,9 @@ public class BoardController {
     }
 
     @GetMapping("/team")
-    public String team_findAll(){
+    public String team_findAll(Model model){
+        List<BoardDTO> boardDTOList = boardService.team_findAll();
+        model.addAttribute("team_post_List",boardDTOList);
         return "team";
     }
 
